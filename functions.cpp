@@ -4,10 +4,11 @@ using namespace std;
 #include <ostream>
 
 
-void greetAndInstruct(){
-        // int board[] = {1,2,3,   10,11,12,   19,20,21,
+// int board[] =            {1,2,3,   10,11,12,   19,20,21,
         //                 4,5,6,   13,14,15,   22,23,24,
-        //                 7,8,9,   16,17,18,   25,26,27};
+        //                 7,8,9,   16,17,18,   25,26,27};      << board looks like this 
+void greetAndInstruct(){
+        
         int board [] { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27};
         cout<<" Hello and welcome to the Tic-Tac-Toe challenge: Player against Computer."<<endl;
         cout <<" The board is numbered from 1 to 27 as per the following:"<<endl ;
@@ -58,7 +59,7 @@ void greetAndInstruct(){
         for (int i = 0; i<28;i++){
            if ( board[i] %3 ==0)
            {    
-               if ( charboard[i]=='X'|| charboard[i]=='O') 
+               if ( charboard[i]=='X'|| charboard[i]=='O')     
                {
                     if (i <=8){cout <<charboard[i]<<"  "; }else{
                  cout <<charboard[i]<<" "<<"  ";}
@@ -79,7 +80,6 @@ void greetAndInstruct(){
                else{
                    i +=6;
                }
-               
            }else
            {
                 if ( charboard[i]=='X'|| charboard[i]=='O')
@@ -112,6 +112,9 @@ void greetAndInstruct(){
            return true;
 
        }
+       /* 
+       call a helper function Over()to check for state of game. 
+       */
        bool ChecWinner(char charboard[]){
            if (Over(charboard) ==1){
                cout<<"You Won !"<<endl;
@@ -127,6 +130,10 @@ void greetAndInstruct(){
            return false;
 
        }
+       /* 
+       check every possible winning conditions
+       return an int 1 for user, 2 for computer when the game is over
+       */
        int Over(char charboard[]){
         int who=0;
         bool end=0;
@@ -189,8 +196,6 @@ void greetAndInstruct(){
         }
         }
         }
-
-    
         // x-z
         //1-13-25
         if(end==0){
@@ -205,19 +210,7 @@ void greetAndInstruct(){
             }
             }
             }
-        //Cross board vertical and horizontal ( 1 -10-19)
-        // if(end==0){
-        // int i=0;
-        // while (i<27){
-        //     if((charboard[i]==charboard[i+9]&&charboard[i+9]==charboard[i+18])){
-        //         end = true;
-        //         if (charboard[i]=='X'){who=1;}else{who=2;}
-        //         break;
-        //     }else{
-        //        i+=3;
-        //     }
-        //     }
-        //     }
+        //Cross board vertical and horizontal ( 1-10-19)
         if(end==0){
         int i=0;
         while (i<27){
@@ -272,7 +265,7 @@ void greetAndInstruct(){
             }
             }
        
-       // diag1
+       // 4 diags cross board
        if (end ==0){
            if(charboard[0]==charboard[13]&&charboard[13]==charboard[26]){
                end =true;
@@ -292,40 +285,21 @@ void greetAndInstruct(){
                }
        }
 
-
-
-    //            }
-
-
-
-        //  int board[] = {1,2,3,   10,11,12,   19,20,21,
-//                         4,5,6,   13,14,15,   22,23,24,
-//                       7,8,9,   16,17,18,   25,26,27};
-
         return who;
        }
+       /*
+       play an X or O on all possible slots, if it's a winning move for player then replace it with O
+       if
+       
+        */
        void ComputerMove(char charboard[]){
            bool moved;
-
-
-
-        //    for (int i =0;i<27;i++){
-        //        char tmp;
-        //        if ( checkIfLegal(i+1,charboard)){
-        //            tmp =charboard[i];
-        //            charboard[i]='O';
-        //            if (!Over(charboard)){
-        //                charboard[i]=tmp;
-        //            }
-        //        }
         if (!moved){
             for (int i=0;i<27;i++){
                 char tmp;
-              //  cout<<"i is now for win = "<<i<<endl;
-
                 if (charboard[i] !='O' && charboard[i]!='X'){
                     tmp = charboard[i];
-                    charboard[i]='O';
+                    charboard[i]='O';       //place an O if win then move there, if not then remove the O
                     if (Over(charboard)){
                         moved=true;
                         cout<<"Computer moving to "<<i+1<<endl;
@@ -342,19 +316,18 @@ void greetAndInstruct(){
                 if (charboard[i] !='O' && charboard[i]!='X'){
                     temp = charboard[i];
                     charboard[i]='X';             // place x on the board and check win condition
-                   // cout<<"placed an X on board at i= "<<i<<endl;
                     if (Over(charboard)==1){
                             charboard[i]='O';
                             moved=true;
                             cout<<"computer moved into "<<i+1<<endl;
                             break;
                 }else{
-                  //  cout<<"nothing happen so removing the X"<<endl;
                     charboard[i]=temp; //remove the X
                 }
             }
             }
         }
+        //else randomly move into an available slot
         if (!moved){
             int move = rand()%26;
             while (charboard[move]=='X' || charboard[move]=='O'){
