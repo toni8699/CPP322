@@ -54,27 +54,27 @@ void greetAndInstruct(){
                                         if X or O then display X and O from the char array
     
      */  
-    void displayBoard(char charboard[]){
-        int board [] { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27};
+    void displayBoard(char board[]){
+        int board1 [] { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27};
         for (int i = 0; i<28;i++){
-           if ( board[i] %3 ==0)
+           if ( board1[i] %3 ==0)
            {    
-               if ( charboard[i]=='X'|| charboard[i]=='O')     
+               if ( board[i]=='X'|| board[i]=='O')     
                {
-                    if (i <=8){cout <<charboard[i]<<"  "; }else{
-                 cout <<charboard[i]<<" "<<"  ";}
+                    if (i <=8){cout <<board[i]<<"  "; }else{
+                 cout <<board[i]<<" "<<"  ";}
                }else
                {
-                cout <<board[i]<<"  ";
+                cout <<board1[i]<<"  ";
                }
-               if (board[i] == 21 || board[i]==24)
+               if (board1[i] == 21 || board1[i]==24)
                {
                    cout <<endl;
                   cout<<"-----" <<"  "<<"--------"<<"  "<<"--------"<<endl;
                }
-               if (board[i]==21){
+               if (board1[i]==21){
                    i=2;
-              }else if (board[i]==24){
+              }else if (board1[i]==24){
                    i=5;
                }
                else{
@@ -82,14 +82,14 @@ void greetAndInstruct(){
                }
            }else
            {
-                if ( charboard[i]=='X'|| charboard[i]=='O')
+                if ( board[i]=='X'|| board[i]=='O')
                 {
-                     if (i <=8){cout <<charboard[i]<<"|"; }else{
-                 cout <<charboard[i]<<" "<<"|";}
+                     if (i <=8){cout <<board[i]<<"|"; }else{
+                 cout <<board[i]<<" "<<"|";}
 
                 }else
                 {
-                     cout <<board[i]<<"|";
+                     cout <<board1[i]<<"|";
                 }
                 
            }
@@ -101,10 +101,10 @@ void greetAndInstruct(){
 
        if the number entered is out of bound or if it's occupy then prompt user to re enter
         */
-       bool checkIfLegal(int CellNbre, char charboard[])
+       bool checkIfLegal(int cellNbre, char board[])
        {
 
-           if ( charboard[CellNbre-1] =='O' || charboard[CellNbre-1]=='X' || CellNbre-1 >26||CellNbre-1<0)
+           if ( board[cellNbre-1] =='O' || board[cellNbre-1]=='X' || cellNbre-1 >26||cellNbre-1<0)
            {
             cout <<endl<<"Il legal move bro try again plx "<<endl;
                return false;
@@ -115,13 +115,13 @@ void greetAndInstruct(){
        /* 
        call a helper function Over()to check for state of game. 
        */
-       bool ChecWinner(char charboard[]){
-           if (Over(charboard) ==1){
+       bool CheckWinner(char board[]){
+           if (Over(board) ==1){
                cout<<"You Won !"<<endl;
                return true;
              //  exit(0);
            }
-           if (Over(charboard)==2){
+           if (Over(board)==2){
                cout<<"Computer Won !"<<endl;
                return true;
              //  exit(0);
@@ -134,16 +134,16 @@ void greetAndInstruct(){
        check every possible winning conditions
        return an int 1 for user, 2 for computer when the game is over
        */
-       int Over(char charboard[]){
+       int Over(char board[]){
         int who=0;
         bool end=0;
       //  check horizontal
        if(end==0){
            int i=0;
         while(i<27){
-            if (charboard[i]==charboard[i+1] && charboard[i+1] == charboard[i+2]){
+            if (board[i]==board[i+1] && board[i+1] == board[i+2]){
                 end =true;
-                if(charboard[i]=='X'){
+                if(board[i]=='X'){
                     who =1;
                 }else{who =2;}
                 break;
@@ -157,9 +157,9 @@ void greetAndInstruct(){
         int i=0;
         while (i<27){ 
            // cout<<"i is "<<i<<" i+3 is "<<i+3<<" i+6 is "<<i+6<<endl;
-                if(charboard[i]==charboard[i+3]&&charboard[i+3]==charboard[i+6]){
+                if(board[i]==board[i+3]&&board[i+3]==board[i+6]){
                 end =true;
-                if (charboard[i]=='X'){who=1;}else{who=2;}
+                if (board[i]=='X'){who=1;}else{who=2;}
                 break;
                 
             }else{
@@ -174,9 +174,9 @@ void greetAndInstruct(){
         if (end==0){
         int i = 0;
         while (i<27){
-            if(charboard[i]==charboard[i+4]&&charboard[i+4]==charboard[i+8]){
+            if(board[i]==board[i+4]&&board[i+4]==board[i+8]){
                 end = true;
-                if (charboard[i]=='X'){who=1;}else{who=2;}
+                if (board[i]=='X'){who=1;}else{who=2;}
                 break;
             }else{
                i+=9;
@@ -187,9 +187,9 @@ void greetAndInstruct(){
         if (end==0){
         int i=0;
         while (i<27){
-            if((charboard[i+2]==charboard[i+4]&&charboard[i+4]==charboard[i+6])){
+            if((board[i+2]==board[i+4]&&board[i+4]==board[i+6])){
                 end = true;
-                if (charboard[i+2]=='X'){who=1;}else{who=2;}
+                if (board[i+2]=='X'){who=1;}else{who=2;}
                 break;
             }else{
                i+=11;
@@ -201,9 +201,9 @@ void greetAndInstruct(){
         if(end==0){
         int i=0;
         while (i<27){
-            if((charboard[i]==charboard[i+12]&&charboard[i+12]==charboard[i+24])){
+            if((board[i]==board[i+12]&&board[i+12]==board[i+24])){
                 end = true;
-                if (charboard[i]=='X'){who=1;}else{who=2;}
+                if (board[i]=='X'){who=1;}else{who=2;}
                 break;
             }else{
                i+=1;
@@ -214,9 +214,9 @@ void greetAndInstruct(){
         if(end==0){
         int i=0;
         while (i<27){
-            if((charboard[i]==charboard[i+9]&&charboard[i+9]==charboard[i+18])){
+            if((board[i]==board[i+9]&&board[i+9]==board[i+18])){
                 end = true;
-                if (charboard[i]=='X'){who=1;}else{who=2;}
+                if (board[i]=='X'){who=1;}else{who=2;}
                 break;
             }else{
                i+=1;
@@ -227,9 +227,9 @@ void greetAndInstruct(){
        if(end ==0){ 
         int i=6;
         while (i<27){
-            if((charboard[i]==charboard[i+6]&&charboard[i+6]==charboard[i+12])){
+            if((board[i]==board[i+6]&&board[i+6]==board[i+12])){
                 end = true;
-                if (charboard[i]=='X'){who=1;}else{who=2;}
+                if (board[i]=='X'){who=1;}else{who=2;}
                 break;
             }else{
                i+=1;
@@ -241,9 +241,9 @@ void greetAndInstruct(){
        if(end ==0){
         int i=0;
         while (i<27){
-            if((charboard[i]==charboard[i+10]&&charboard[i+10]==charboard[i+20])){
+            if((board[i]==board[i+10]&&board[i+10]==board[i+20])){
                 end = true;
-                if (charboard[i]=='X'){who=1;}else{who=2;}
+                if (board[i]=='X'){who=1;}else{who=2;}
                 break;
             }else{
                i+=3;
@@ -255,9 +255,9 @@ void greetAndInstruct(){
        if (end ==0){
         int i=0;
        while (i<27){
-            if((charboard[i+2]==charboard[i+10]&&charboard[i+10]==charboard[i+18])){
+            if((board[i+2]==board[i+10]&&board[i+10]==board[i+18])){
                 end = true;
-                if (charboard[i]=='X'){who=1;}else{who=2;}
+                if (board[i]=='X'){who=1;}else{who=2;}
                 break;
             }else{
                i+=3;
@@ -267,21 +267,21 @@ void greetAndInstruct(){
        
        // 4 diags cross board
        if (end ==0){
-           if(charboard[0]==charboard[13]&&charboard[13]==charboard[26]){
+           if(board[0]==board[13]&&board[13]==board[26]){
                end =true;
-               if(charboard[0]=='X'){who=1;}else{who=2;}
+               if(board[0]=='X'){who=1;}else{who=2;}
                }
-           if (charboard[2]==charboard[13]&&charboard[13]==charboard[24]){
+           if (board[2]==board[13]&&board[13]==board[24]){
                end =true;
-               if(charboard[2]=='X'){who=1;}else{who=2;}
+               if(board[2]=='X'){who=1;}else{who=2;}
                }
-           if( charboard[8]==charboard[13]&&charboard[13]==charboard[18]){
+           if( board[8]==board[13]&&board[13]==board[18]){
                end =true;
-               if(charboard[8]=='X'){who=1;}else{who=2;}
+               if(board[8]=='X'){who=1;}else{who=2;}
                }
-           if(charboard[6]==charboard[13]&&charboard[13]==charboard[20]){
+           if(board[6]==board[13]&&board[13]==board[20]){
                end =true;
-               if(charboard[6]=='X'){who=1;}else{who=2;}
+               if(board[6]=='X'){who=1;}else{who=2;}
                }
        }
 
@@ -292,20 +292,20 @@ void greetAndInstruct(){
        if
        
         */
-       void ComputerMove(char charboard[]){
+       void computerMove(char board[]){
            bool moved;
         if (!moved){
             for (int i=0;i<27;i++){
                 char tmp;
-                if (charboard[i] !='O' && charboard[i]!='X'){
-                    tmp = charboard[i];
-                    charboard[i]='O';       //place an O if win then move there, if not then remove the O
-                    if (Over(charboard)){
+                if (board[i] !='O' && board[i]!='X'){
+                    tmp = board[i];
+                    board[i]='O';       //place an O if win then move there, if not then remove the O
+                    if (Over(board)){
                         moved=true;
                         cout<<"Computer moving to "<<i+1<<endl;
                         break;
                     }else{
-                        charboard[i]=tmp;
+                        board[i]=tmp;
                     }
                 }
             }
@@ -313,16 +313,16 @@ void greetAndInstruct(){
         if (!moved){
             for(int i=0;i<27;i++){
                 char temp;
-                if (charboard[i] !='O' && charboard[i]!='X'){
-                    temp = charboard[i];
-                    charboard[i]='X';             // place x on the board and check win condition
-                    if (Over(charboard)==1){
-                            charboard[i]='O';
+                if (board[i] !='O' && board[i]!='X'){
+                    temp = board[i];
+                    board[i]='X';             // place x on the board and check win condition
+                    if (Over(board)==1){
+                            board[i]='O';
                             moved=true;
                             cout<<"computer moved into "<<i+1<<endl;
                             break;
                 }else{
-                    charboard[i]=temp; //remove the X
+                    board[i]=temp; //remove the X
                 }
             }
             }
@@ -330,10 +330,10 @@ void greetAndInstruct(){
         //else randomly move into an available slot
         if (!moved){
             int move = rand()%26;
-            while (charboard[move]=='X' || charboard[move]=='O'){
+            while (board[move]=='X' || board[move]=='O'){
                 move = rand()%26;
             }
-            charboard[move]='O'; 
+            board[move]='O'; 
             cout<<"Computer moved into "<<move+1<<endl;
         }
         }

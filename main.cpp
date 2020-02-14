@@ -19,10 +19,6 @@ char boardchar[] = {'a','b','d',
                                             's','t','u',    
                                             'v','w','x',   
                                             'y','z','$'};
-char boardchar2[27];
-
-
-
 int main()
 {
     greetAndInstruct();
@@ -33,10 +29,9 @@ int main()
     cin >>input;
     if (checkIfLegal(input,boardchar)){
         boardchar[input-1]='X';
-        ComputerMove(boardchar);
-
+        computerMove(boardchar);
     }
-    if (ChecWinner(boardchar)){
+    if (CheckWinner(boardchar)){
         displayBoard(boardchar);
         exit(0);
     }
